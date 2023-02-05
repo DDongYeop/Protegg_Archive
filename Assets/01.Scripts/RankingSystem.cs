@@ -7,13 +7,13 @@ using TMPro;
 
 public class RankingSystem : MonoBehaviour
 {
+    [SerializeField] private GameObject _googleAccount;
+    
     private void Start()
     {
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
         LogIn();
-        
-        UpdateGoogleScore();
     }
 
     public void LogIn()
@@ -33,8 +33,18 @@ public class RankingSystem : MonoBehaviour
 
     public void ShowLeaderboardUI()
     {
-        Social.ShowLeaderboardUI();
-        // ((PlayGamesPlatform)Social.Active).ShowLeaderboardUI(GPGSIds.leaderboard_score);
+        LogIn();
+        UpdateGoogleScore();
+        Social.localUser.Authenticate((bool success) =>
+        {
+            if (success)
+            {
+                Social.ShowLeaderboardUI();
+                _googleAccount.SetActive(false);
+            }
+            else
+                _googleAccount.SetActive(true);
+        });
     }
 
     public void UpdateGoogleScore()
