@@ -11,13 +11,14 @@ public class RankingSystem : MonoBehaviour
     
     private void Start()
     {
-        PlayGamesPlatform.DebugLogEnabled = true;
-        PlayGamesPlatform.Activate();
         LogIn();
+        UpdateGoogleScore();
     }
 
     public void LogIn()
     {
+        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.Activate();
         Social.localUser.Authenticate((bool success) =>
         {
             if (!success)

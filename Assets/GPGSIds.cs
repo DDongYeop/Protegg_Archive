@@ -24,6 +24,9 @@
 
 public static class GPGSIds
 {
+        public const string achievement_whitechicken = "CgkIl9rcj5QCEAIQAg"; // <GPGSID>
+        public const string achievement_darkchicken = "CgkIl9rcj5QCEAIQBA"; // <GPGSID>
+        public const string achievement_brownchicken = "CgkIl9rcj5QCEAIQAw"; // <GPGSID>
         public const string leaderboard_score = "CgkIl9rcj5QCEAIQAA"; // <GPGSID>
 
 }

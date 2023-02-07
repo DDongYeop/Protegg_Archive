@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
@@ -59,6 +60,7 @@ public class SaveSystem : MonoBehaviour
             string json = File.ReadAllText(_savePath + _saveFileName);
             saveData = JsonUtility.FromJson<SaveData>(json);
 
+            ChickenAnimation.Instance.Load(saveData.chickenIndex);
             LanguageChange languageChange = FindObjectOfType<LanguageChange>();
             Sound sound = FindObjectOfType<Sound>();
             languageChange.LoadLanguage(saveData.language);
@@ -71,6 +73,11 @@ public class SaveSystem : MonoBehaviour
                 GameManager.Instance.socreText.text = saveData.thisScore.ToString();
                 GameManager.Instance.bestText.text = saveData.maxScore.ToString();
             }
+            if (AchievementSystem.Instance != null)
+            {
+                AchievementSystem.Instance.Achievement();
+            }
+            
         }
     }
 }

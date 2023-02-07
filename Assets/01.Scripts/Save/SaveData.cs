@@ -5,4 +5,5 @@ public class SaveData
     public bool Effect;
     public long thisScore;
     public long maxScore;
+    public int chickenIndex;
 }
