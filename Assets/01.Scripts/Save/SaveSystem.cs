@@ -74,10 +74,11 @@ public class SaveSystem : MonoBehaviour
                 GameManager.Instance.bestText.text = saveData.maxScore.ToString();
             }
             if (AchievementSystem.Instance != null)
-            {
                 AchievementSystem.Instance.Achievement();
+            if (RankingSystem.Instance != null)
+            {
+                RankingSystem.Instance.UpdateGoogleScore(saveData.maxScore);
             }
-            
         }
     }
 }

@@ -25,17 +25,17 @@ public class AchievementSystem : MonoBehaviour
         
         if (SaveSystem.Instance.saveData.maxScore >= 0)
         {
-            PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_whitechicken, 1, null);
+            Social.ReportProgress(GPGSIds.achievement_whitechicken, 100, null);
             _buttons[0].interactable = true;
+        }
+        if (SaveSystem.Instance.saveData.maxScore >= 250)
+        {
+            Social.ReportProgress(GPGSIds.achievement_brownchicken, 100, null);
+            _buttons[1].interactable = true;
         }
         if (SaveSystem.Instance.saveData.maxScore >= 500)
         {
-            PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_brownchicken, 1, null);
-            _buttons[1].interactable = true;
-        }
-        if (SaveSystem.Instance.saveData.maxScore >= 1000)
-        {
-            PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_darkchicken, 1, null);
+            Social.ReportProgress(GPGSIds.achievement_darkchicken, 100, null);
             _buttons[2].interactable = true;
         }
     }

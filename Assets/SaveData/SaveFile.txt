@@ -1,1 +1,1 @@
-{"language":"Korean (ko)","BGM":true,"Effect":true,"thisScore":0,"maxScore":1000,"chickenIndex":2}
+{"language":"Korean (ko)","BGM":true,"Effect":true,"thisScore":0,"maxScore":1000,"chickenIndex":0}

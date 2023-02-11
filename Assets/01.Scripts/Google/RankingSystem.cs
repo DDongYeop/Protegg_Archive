@@ -7,12 +7,20 @@ using TMPro;
 
 public class RankingSystem : MonoBehaviour
 {
+    public static RankingSystem Instance = null;
     [SerializeField] private GameObject _googleAccount;
-    
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
+
     private void Start()
     {
         LogIn();
-        UpdateGoogleScore();
     }
 
     public void LogIn()
@@ -35,7 +43,6 @@ public class RankingSystem : MonoBehaviour
     public void ShowLeaderboardUI()
     {
         LogIn();
-        UpdateGoogleScore();
         Social.localUser.Authenticate((bool success) =>
         {
             if (success)
@@ -48,8 +55,16 @@ public class RankingSystem : MonoBehaviour
         });
     }
 
-    public void UpdateGoogleScore()
+    public void UpdateGoogleScore(long score)
     {
-        Social.ReportScore(SaveSystem.Instance.saveData.thisScore, GPGSIds.leaderboard_score, (bool success) => { });
+        Social.localUser.Authenticate((bool success) => 
+        {
+            if(success)
+            {
+                Debug.Log(Social.localUser.id);
+            }
+        });
+        print(score);
+        Social.ReportScore(score, GPGSIds.leaderboard_score, null);
     }
 }
