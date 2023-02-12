@@ -31,9 +31,9 @@ public class ChickenMove : MonoBehaviour
         if (_moveButton[1].isDown && _moveButton[2].isDown)
             ChickenMoveMethod(ChickenState.Up, 0);
         else if (_moveButton[1].isDown && _moveButton[3].isDown)
-            ChickenMoveMethod(ChickenState.Left, 1);
+            ChickenMoveMethod(ChickenState.Left, 1, 0);
         else if (_moveButton[2].isDown && _moveButton[4].isDown)
-            ChickenMoveMethod(ChickenState.Right, 2);
+            ChickenMoveMethod(ChickenState.Right, 2, 180);
         else if (_moveButton[3].isDown && _moveButton[4].isDown)
             ChickenMoveMethod(ChickenState.Down, 3);
         else if (_moveButton[0].isDown)
@@ -41,11 +41,11 @@ public class ChickenMove : MonoBehaviour
         else if (_moveButton[1].isDown)
             ChickenMoveMethod(ChickenState.LeftUp, 5);
         else if (_moveButton[2].isDown)
-            ChickenMoveMethod(ChickenState.RightUp, 6);
+            ChickenMoveMethod(ChickenState.RightUp, 6, 180);
         else if (_moveButton[3].isDown)
             ChickenMoveMethod(ChickenState.LeftDown, 7);
         else if (_moveButton[4].isDown)
-            ChickenMoveMethod(ChickenState.RightDown, 8);
+            ChickenMoveMethod(ChickenState.RightDown, 8, 180);
     }
 
     private void ScoreUp()
@@ -56,10 +56,12 @@ public class ChickenMove : MonoBehaviour
             ChickenAnimation.Instance.ChickenIncubateAnimation(false);
     }
 
-    private void ChickenMoveMethod(ChickenState moveState, int index)
+    private void ChickenMoveMethod(ChickenState moveState, int index, int rotationindex = 0)
     {
         if (_isMove)
             return;
+
+            SpriteFlip(rotationindex);
         
         if (_chickenState != moveState)
         {
@@ -79,5 +81,10 @@ public class ChickenMove : MonoBehaviour
                 ChickenAnimation.Instance.ChickenMoveAnimation(_isMove);
             });
         }
+    }
+
+    private void SpriteFlip(float index)
+    {
+        transform.localRotation = Quaternion.Euler(0, index, 0);
     }
 }
